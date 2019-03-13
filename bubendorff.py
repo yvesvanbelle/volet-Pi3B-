@@ -2,6 +2,12 @@ import RPi.GPIO as GPIO
 import time
 import dht11
 
+
+PINRELAIS = 18
+PINTEMP = 23
+PINLIGHT = 25
+
+
 def relais(pin):
 	GPIO.setwarnings(False)
 	GPIO.setmode(GPIO.BCM)
@@ -13,6 +19,7 @@ def relais(pin):
 	time.sleep(3)
 
 	GPIO.cleanup()
+
 
 def temp_humidity(pin):
 	GPIO.setwarnings(False)
@@ -29,7 +36,14 @@ def temp_humidity(pin):
 		time.sleep(1)
 
 
-if __name__ == '__main__':
-	#relais(pin=18)
+def light(pin):
+	GPIO.setmode(GPIO.BCM)
+	GPIO.setup(pin, GPIO.IN)
+	
+	return GPIO.input(pin)
 
-	print(temp_humidity(23))
+
+if __name__ == '__main__':
+        relais(PINRELAIS)
+        print(light(PINLIGHT))
+        print(temp_humidity(PINTEMP))
