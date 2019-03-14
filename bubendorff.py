@@ -14,9 +14,9 @@ def relais(pin):
     GPIO.setup(pin, GPIO.OUT)
 
     GPIO.output(pin, True)
-    time.sleep(3)
+    time.sleep(2)
     GPIO.output(pin, False)
-    time.sleep(3)
+    time.sleep(2)
 
     GPIO.cleanup()
 
