@@ -59,5 +59,5 @@ if __name__ == '__main__':
     relais(PINRELAIS)
     print(light(PINLIGHT))
     print(temp_humidity_inside(PINTEMP))
-	print(temp_humidity_outside())
+    print(temp_humidity_outside())
 	
