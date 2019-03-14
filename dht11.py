@@ -1,3 +1,7 @@
+#  MIT License
+#  Copyright (c) 2016 Zoltan Szarvas
+#  https://github.com/szazo/DHT11_Python
+
 import time
 import RPi
 
