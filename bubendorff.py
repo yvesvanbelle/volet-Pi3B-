@@ -25,11 +25,11 @@ def relais(pin):
     GPIO.cleanup()
 
 
-def relais_up():
+def volet_up():
     relais(PIN_RELAIS_UP)
 
 
-def relais_down():
+def volet_down():
     relais(PIN_RELAIS_DOWN)
 
 
@@ -59,11 +59,11 @@ def temp_humidity_outside():
     return temp, humidity
 
 
-def is_dark(pin):
+def is_dark():
     GPIO.setwarnings(False)
     GPIO.setmode(GPIO.BCM)
-    GPIO.setup(pin, GPIO.IN)
-    light_dark = GPIO.input(pin)
+    GPIO.setup(PIN_LIGHT, GPIO.IN)
+    light_dark = GPIO.input(PIN_LIGHT)
     GPIO.cleanup()
     if light_dark == 0:
         return True
@@ -73,7 +73,8 @@ def is_dark(pin):
 
 if __name__ == '__main__':
     print("----------")
-    relais(PIN_RELAIS)
-    print("Dark: {}".format(is_dark(PIN_LIGHT)))
-    print("Inside temp, humidity: {}".format(temp_humidity_inside(PIN_TEMP)))
+    volet_up()
+    volet_down()
+    print("Dark: {}".format(is_dark()))
+    print("Inside temp, humidity: {}".format(temp_humidity_inside()))
     print("Outside temp, humidity: {}".format(temp_humidity_outside()))

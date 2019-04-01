@@ -17,11 +17,13 @@ def relais(pin):
     print("Dectivated relais {}".format(pin))
 
 
-def relais_up():
+def volet_up():
+    print("Up")
     relais(PIN_RELAIS_UP)
 
 
-def relais_down():
+def volet_down():
+    print("Down")
     relais(PIN_RELAIS_DOWN)
 
 
@@ -42,7 +44,7 @@ def temp_humidity_outside():
     return temp, humidity
 
 
-def is_dark(pin):
+def is_dark():
     light_dark = random.randint(0, 1)
     if light_dark == 0:
         return True
@@ -52,7 +54,8 @@ def is_dark(pin):
 
 if __name__ == '__main__':
     print("----------")
-    relais(PIN_RELAIS)
-    print("Dark: {}".format(is_dark(PIN_LIGHT)))
-    print("Inside temp, humidity: {}".format(temp_humidity_inside(PIN_TEMP)))
+    volet_up()
+    volet_down()
+    print("Dark: {}".format(is_dark()))
+    print("Inside temp, humidity: {}".format(temp_humidity_inside()))
     print("Outside temp, humidity: {}".format(temp_humidity_outside()))
