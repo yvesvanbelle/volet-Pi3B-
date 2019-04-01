@@ -1,3 +1,6 @@
+#  MIT LIcense
+#  Copyright 2019 Yves Van Belle
+
 import RPi.GPIO as GPIO
 import requests
 import time
