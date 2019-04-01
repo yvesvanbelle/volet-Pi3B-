@@ -26,4 +26,4 @@ while True:
         volet_action()
         volet_status = volet_action
 
-    time.sleep(3)  # 1/2 hour = 1800 seconds
+    time.sleep(1800)  # 1/2 hour = 1800 seconds
