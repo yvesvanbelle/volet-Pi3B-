@@ -60,7 +60,7 @@ def is_dark(pin):
         return True
     elif light_dark == 1:
         return False
-    
+
 
 if __name__ == '__main__':
     relais(PIN_RELAIS)
