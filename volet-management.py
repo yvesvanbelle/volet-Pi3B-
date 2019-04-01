@@ -1,7 +1,7 @@
 #  MIT LIcense
 #  Copyright 2019 Yves Van Belle
 
-from bubendorfftest import *
+from bubendorff import *
 
 volet_action = volet_up
 volet_status = volet_action
