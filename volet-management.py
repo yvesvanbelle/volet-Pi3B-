@@ -4,15 +4,22 @@
 from bubendorfftest import *
 
 volet_action = volet_up
+volet_status = volet_action
 
+while True:
+    dark = is_dark()
+    temp_in = temp_humidity_inside()[0]
+    temp_out = temp_humidity_outside()[0]
+    print('------')
+    print('Temp_in:{}-Temp_out:{}-Is dark:{}'.format(temp_in, temp_out, dark))
 
-temp_in = temp_humidity_inside()[0]
-temp_out = temp_humidity_outside()[0]
+    if dark is True:
+        volet_action = volet_down
+    elif (temp_in > 22) and (temp_out > temp_in):
+        volet_action = volet_down
 
-if (temp_in > 22) and (temp_out > temp_in):
-    volet_action = volet_down
+    if volet_status != volet_action:
+        volet_action()
+        volet_status = volet_action
 
-if is_dark() is True:
-    volet_action = volet_down
-
-volet_action()
+    time.sleep(1800)  # 1/2 hour = 1800 seconds

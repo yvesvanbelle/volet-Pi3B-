@@ -28,7 +28,7 @@ def volet_down():
 
 
 def temp_humidity_inside():
-    temperature = random.randrange(-5, 50)
+    temperature = random.randrange(16, 30)
     humidity = random.randrange(0, 100)
     return temperature, humidity
 
