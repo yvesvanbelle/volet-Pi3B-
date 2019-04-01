@@ -47,17 +47,20 @@ def temp_humidity_outside():
     return temp, humidity
 
 
-def light(pin):
+def is_dark(pin):
     GPIO.setwarnings(False)
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(pin, GPIO.IN)
     light_dark = GPIO.input(pin)
     GPIO.cleanup()
-    return light_dark
-
+    if light_dark == 0:
+        return True
+    elif light_dark == 1:
+        return False
+    
 
 if __name__ == '__main__':
     relais(PIN_RELAIS)
-    print(light(PIN_LIGHT))
+    print(is_dark(PIN_LIGHT))
     print(temp_humidity_inside(PIN_TEMP))
     print(temp_humidity_outside())
