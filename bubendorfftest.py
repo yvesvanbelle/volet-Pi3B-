@@ -5,7 +5,8 @@ import requests
 import time
 import random
 
-PIN_RELAIS = 18
+PIN_RELAIS_UP = 18
+PIN_RELAIS_DOWN = 21
 PIN_TEMP = 23
 PIN_LIGHT = 25
 
@@ -16,7 +17,15 @@ def relais(pin):
     print("Dectivated relais {}".format(pin))
 
 
-def temp_humidity_inside(pin):
+def relais_up():
+    relais(PIN_RELAIS_UP)
+
+
+def relais_down():
+    relais(PIN_RELAIS_DOWN)
+
+
+def temp_humidity_inside():
     temperature = random.randrange(-5, 50)
     humidity = random.randrange(0, 100)
     return temperature, humidity

@@ -6,7 +6,8 @@ import requests
 import time
 import dht11
 
-PIN_RELAIS = 18
+PIN_RELAIS_UP = 18
+PIN_RELAIS_DOWN = 21
 PIN_TEMP = 23
 PIN_LIGHT = 25
 
@@ -24,11 +25,19 @@ def relais(pin):
     GPIO.cleanup()
 
 
-def temp_humidity_inside(pin):
+def relais_up():
+    relais(PIN_RELAIS_UP)
+
+
+def relais_down():
+    relais(PIN_RELAIS_DOWN)
+
+
+def temp_humidity_inside():
     GPIO.setwarnings(False)
     GPIO.setmode(GPIO.BCM)
 
-    instance = dht11.DHT11(pin)
+    instance = dht11.DHT11(PIN_TEMP)
 
     while True:
         result = instance.read()
