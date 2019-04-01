@@ -1,10 +1,8 @@
 #  MIT LIcense
 #  Copyright 2019 Yves Van Belle
 
-import RPi.GPIO as GPIO
 import requests
-import time
-import dht11
+import random
 
 PIN_RELAIS = 18
 PIN_TEMP = 23
@@ -12,31 +10,13 @@ PIN_LIGHT = 25
 
 
 def relais(pin):
-    GPIO.setwarnings(False)
-    GPIO.setmode(GPIO.BCM)
-    GPIO.setup(pin, GPIO.OUT)
-
-    GPIO.output(pin, True)
-    time.sleep(2)
-    GPIO.output(pin, False)
-    time.sleep(2)
-
-    GPIO.cleanup()
+    print("Activated relais {}".format(pin))
 
 
 def temp_humidity_inside(pin):
-    GPIO.setwarnings(False)
-    GPIO.setmode(GPIO.BCM)
-
-    instance = dht11.DHT11(pin)
-
-    while True:
-        result = instance.read()
-        if result.is_valid():
-            GPIO.cleanup()
-            return result.temperature, result.humidity
-
-        time.sleep(1)
+    temperature = random.randrange(-5, 50)
+    humidity = random.randrange(0, 100)
+    return temperature, humidity
 
 
 def temp_humidity_outside():
@@ -51,11 +31,7 @@ def temp_humidity_outside():
 
 
 def is_dark(pin):
-    GPIO.setwarnings(False)
-    GPIO.setmode(GPIO.BCM)
-    GPIO.setup(pin, GPIO.IN)
-    light_dark = GPIO.input(pin)
-    GPIO.cleanup()
+    light_dark = random.randint(0, 1)
     if light_dark == 0:
         return True
     elif light_dark == 1:
