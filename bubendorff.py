@@ -1,4 +1,4 @@
-#  MIT LIcense
+#  MIT License
 #  Copyright 2019 Yves Van Belle
 
 import RPi.GPIO as GPIO

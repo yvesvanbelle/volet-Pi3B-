@@ -1,4 +1,4 @@
-#  MIT LIcense
+#  MIT License
 #  Copyright 2019 Yves Van Belle
 
 import time
@@ -27,4 +27,4 @@ while True:
         volet_action()
         volet_status = volet_action
 
-    time.sleep(3)  # 1/2 hour = 1800 seconds - 1 hour = 3600 seconds
+    time.sleep(3)  # 1/2 hour = 1800 seconds # 1 hour = 3600 seconds
