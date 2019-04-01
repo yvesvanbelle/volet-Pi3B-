@@ -1,7 +1,7 @@
 #  MIT LIcense
 #  Copyright 2019 Yves Van Belle
 
-from bubendorff import *
+from bubendorfftest import *
 
 volet_action = volet_up
 volet_status = volet_action
@@ -15,9 +15,7 @@ while True:
 
     if dark is True:
         volet_action = volet_down
-    elif temp_in > 22:
-        volet_action = volet_down
-    elif temp_out > temp_in:
+    elif (temp_in > 22) and (temp_out > temp_in):
         volet_action = volet_down
     else:
         volet_action = volet_up
@@ -26,4 +24,4 @@ while True:
         volet_action()
         volet_status = volet_action
 
-    time.sleep(1800)  # 1/2 hour = 1800 seconds
+    time.sleep(3)  # 1/2 hour = 1800 seconds
