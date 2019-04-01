@@ -49,7 +49,8 @@ def temp_humidity_inside():
 
 
 def temp_humidity_outside():
-    weather_data_url = 'http://api.openweathermap.org/data/2.5/weather?q=Koekelberg,BE&units=metric&' + \
+    weather_data_url = 'http://api.openweathermap.org/data/2.5/weather?' + \
+                       'q=Koekelberg,BE&units=metric&' + \
                        'APPID=375e74b400588fcf07d13dbd342093fc'
 
     weather_data = requests.get(weather_data_url)
