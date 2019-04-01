@@ -1,7 +1,10 @@
 #  MIT LIcense
 #  Copyright 2019 Yves Van Belle
 
-from bubendorfftest import *
+import time
+from bubendorfftest import temp_humidity_inside, temp_humidity_outside, \
+                           volet_down, volet_up, is_dark
+
 
 volet_action = volet_up
 volet_status = volet_action
