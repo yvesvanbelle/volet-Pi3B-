@@ -2,6 +2,7 @@
 #  Copyright 2019 Yves Van Belle
 
 import requests
+import time
 import random
 
 PIN_RELAIS = 18
@@ -11,6 +12,8 @@ PIN_LIGHT = 25
 
 def relais(pin):
     print("Activated relais {}".format(pin))
+    time.sleep(2)
+    print("Dectivated relais {}".format(pin))
 
 
 def temp_humidity_inside(pin):
