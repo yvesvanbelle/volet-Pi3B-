@@ -15,11 +15,15 @@ while True:
 
     if dark is True:
         volet_action = volet_down
-    elif (temp_in > 22) and (temp_out > temp_in):
+    elif temp_in > 22:
         volet_action = volet_down
+    elif temp_out > temp_in:
+        volet_action = volet_down
+    else:
+        volet_action = volet_up
 
     if volet_status != volet_action:
         volet_action()
         volet_status = volet_action
 
-    time.sleep(1800)  # 1/2 hour = 1800 seconds
+    time.sleep(3)  # 1/2 hour = 1800 seconds
