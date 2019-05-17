@@ -18,8 +18,6 @@ while True:
 
     if dark is True:
         volet_action = volet_down
-    elif (temp_in > 21) and (temp_out > temp_in):
-        volet_action = volet_down
     elif (temp_in > 23):
         volet_action = volet_down
     else:
