@@ -56,7 +56,7 @@ if __name__ == '__main__':
     action = VOLETUP
 
     if(light == 0):  # if it is dark
-        if(start_evening < current_time < start_morning):  # if it is between 17:00 and 6:30
+        if(start_evening < current_time < start_morning):  # between 17:00 to 6:30
             if(current_day < 5):  # if current day is before saturday
                 action = VOLETDOWN
 
