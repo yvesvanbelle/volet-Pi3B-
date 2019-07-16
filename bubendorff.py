@@ -45,33 +45,31 @@ def light(pin):
     return GPIO.input(pin)
 
 
-if __name__ == '__main__':
-    start_evening = datetime.time(18)
-    end_evening = datetime.time(23)
-    start_morning = datetime.time(6,30)
-    end_morning = datetime.time(10)
+def start():
+    begin_day = datetime.time(6, 30)
+    end_day = datetime.time(17)
     current_time = datetime.datetime.now().time()
     current_day = datetime.datetime.now().weekday()  # 0 is monday
     light_or_dark = light(PINLIGHT)  # 0=dark 1=light
     temperature = temp_humidity(PINTEMP)[0]
 
-    #action = VOLETUP
-    
+    action = VOLETUP
+
     with open('/home/pi/volet-pi3b/statusvolet.txt', 'rb') as f:
         status = pickle.load(f)
-    
-    if(start_evening < current_time < end_evening):
-        if (light_or_dark == 0):
+
+    if not (begin_day < current_time < end_day):
+        if light_or_dark == 0:
             action = VOLETDOWN
 
-    if(start_morning < current_time < end_morning):
-        action = VOLETUP
+    if temperature > 24:
+        action = VOLETDOWN
 
-    if(action != status):
+    if action != status:
         with open('/home/pi/volet-pi3b/statusvolet.txt', 'wb') as f:
             pickle.dump(action, f)
         relais(action)
-            
-    print(temperature)
-    
-    
+
+
+if __name__ == '__main__':
+    start()
