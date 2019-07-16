@@ -8,6 +8,7 @@ VOLET_UP = 20
 VOLET_DOWN = 21
 PIN_TEMP = 23
 PIN_LIGHT = 25
+MAX_TEMP = 24
 
 
 def relais(pin):
@@ -62,7 +63,7 @@ def start():
         if light_or_dark == 0:
             action = VOLET_DOWN
 
-    if temperature > 24:
+    if temperature > MAX_TEMP:
         action = VOLET_DOWN
 
     if action != status:
