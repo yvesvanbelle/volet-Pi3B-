@@ -1,3 +1,6 @@
+# Licensed under the MIT license
+# Copyright (c) 2019 Yves Van Belle (yvanbelle@outlook.com)
+
 import time
 import datetime
 import pickle
