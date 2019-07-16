@@ -1,5 +1,6 @@
 import time
 import datetime
+import pickle
 import RPi.GPIO as GPIO
 import dht11
 
@@ -45,25 +46,32 @@ def light(pin):
 
 
 if __name__ == '__main__':
-    start_evening = datetime.time(17)
-    start_morning = datetime.time(6, 30)
+    start_evening = datetime.time(18)
+    end_evening = datetime.time(23)
+    start_morning = datetime.time(6,30)
+    end_morning = datetime.time(10)
     current_time = datetime.datetime.now().time()
     current_day = datetime.datetime.now().weekday()  # 0 is monday
+    light_or_dark = light(PINLIGHT)  # 0=dark 1=light
+    temperature = temp_humidity(PINTEMP)[0]
 
-    with open('statusvolet.txt', 'r') as f:
-        status = f.read()
+    #action = VOLETUP
+    
+    with open('/home/pi/volet-pi3b/statusvolet.txt', 'rb') as f:
+        status = pickle.load(f)
+    
+    if(start_evening < current_time < end_evening):
+        if (light_or_dark == 0):
+            action = VOLETDOWN
 
-    action = VOLETUP
-
-    if(light == 0):  # if it is dark
-        if(start_evening < current_time < start_morning):  # between 17:00 to 6:30
-            if(current_day < 5):  # if current day is before saturday
-                action = VOLETDOWN
-
-    if(temp_humidity(PINLIGHT)[0] > 24):  # if temp is higher than 24°C
-        action = VOLETDOWN
+    if(start_morning < current_time < end_morning):
+        action = VOLETUP
 
     if(action != status):
-        with open('statusvolet.txt', 'w') as f:
-            f.write(action)
+        with open('/home/pi/volet-pi3b/statusvolet.txt', 'wb') as f:
+            pickle.dump(action, f)
         relais(action)
+            
+    print(temperature)
+    
+    
