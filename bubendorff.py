@@ -54,6 +54,8 @@ def start():
     light_or_dark = light(PIN_LIGHT)  # 0=dark 1=light
     temperature = temp_humidity(PIN_TEMP)[0]
 
+    print(current_day)
+
     action = VOLET_UP
 
     with open('/home/pi/volet-pi3b/statusvolet.txt', 'rb') as f:
