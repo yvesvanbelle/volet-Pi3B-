@@ -4,10 +4,10 @@ import pickle
 import RPi.GPIO as GPIO
 import dht11
 
-VOLETUP = 20
-VOLETDOWN = 21
-PINTEMP = 23
-PINLIGHT = 25
+VOLET_UP = 20
+VOLET_DOWN = 21
+PIN_TEMP = 23
+PIN_LIGHT = 25
 
 
 def relais(pin):
@@ -50,20 +50,20 @@ def start():
     end_day = datetime.time(17)
     current_time = datetime.datetime.now().time()
     current_day = datetime.datetime.now().weekday()  # 0 is monday
-    light_or_dark = light(PINLIGHT)  # 0=dark 1=light
-    temperature = temp_humidity(PINTEMP)[0]
+    light_or_dark = light(PIN_LIGHT)  # 0=dark 1=light
+    temperature = temp_humidity(PIN_TEMP)[0]
 
-    action = VOLETUP
+    action = VOLET_UP
 
     with open('/home/pi/volet-pi3b/statusvolet.txt', 'rb') as f:
         status = pickle.load(f)
 
     if not (begin_day < current_time < end_day):
         if light_or_dark == 0:
-            action = VOLETDOWN
+            action = VOLET_DOWN
 
     if temperature > 24:
-        action = VOLETDOWN
+        action = VOLET_DOWN
 
     if action != status:
         with open('/home/pi/volet-pi3b/statusvolet.txt', 'wb') as f:
