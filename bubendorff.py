@@ -1,13 +1,17 @@
+# Licensed under the MIT license
+# Copyright (c) 2019 Yves Van Belle (yvanbelle@outlook.com)
+
 import time
 import datetime
 import pickle
 import RPi.GPIO as GPIO
 import dht11
 
-VOLETUP = 20
-VOLETDOWN = 21
-PINTEMP = 23
-PINLIGHT = 25
+VOLET_UP = 20
+VOLET_DOWN = 21
+PIN_TEMP = 23
+PIN_LIGHT = 25
+MAX_TEMP = 24
 
 
 def relais(pin):
@@ -16,9 +20,9 @@ def relais(pin):
     GPIO.setup(pin, GPIO.OUT)
 
     GPIO.output(pin, True)
-    time.sleep(2)
+    time.sleep(1)
     GPIO.output(pin, False)
-    time.sleep(2)
+    time.sleep(1)
 
     GPIO.cleanup()
 
@@ -45,33 +49,33 @@ def light(pin):
     return GPIO.input(pin)
 
 
-if __name__ == '__main__':
-    start_evening = datetime.time(18)
-    end_evening = datetime.time(23)
-    start_morning = datetime.time(6,30)
-    end_morning = datetime.time(10)
+def start():
+    begin_day = datetime.time(6, 30)
+    end_day = datetime.time(17)
     current_time = datetime.datetime.now().time()
     current_day = datetime.datetime.now().weekday()  # 0 is monday
-    light_or_dark = light(PINLIGHT)  # 0=dark 1=light
-    temperature = temp_humidity(PINTEMP)[0]
+    light_or_dark = light(PIN_LIGHT)  # 0=dark 1=light
+    temperature = temp_humidity(PIN_TEMP)[0]
 
-    #action = VOLETUP
-    
+    print(current_day)
+
+    action = VOLET_UP
+
     with open('/home/pi/volet-pi3b/statusvolet.txt', 'rb') as f:
         status = pickle.load(f)
-    
-    if(start_evening < current_time < end_evening):
-        if (light_or_dark == 0):
-            action = VOLETDOWN
 
-    if(start_morning < current_time < end_morning):
-        action = VOLETUP
+    if not (begin_day < current_time < end_day):
+        if light_or_dark == 0:
+            action = VOLET_DOWN
 
-    if(action != status):
+    if temperature > MAX_TEMP:
+        action = VOLET_DOWN
+
+    if action != status:
         with open('/home/pi/volet-pi3b/statusvolet.txt', 'wb') as f:
             pickle.dump(action, f)
         relais(action)
-            
-    print(temperature)
-    
-    
+
+
+if __name__ == '__main__':
+    start()
