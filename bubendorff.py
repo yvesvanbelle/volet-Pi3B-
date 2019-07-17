@@ -11,7 +11,7 @@ VOLET_UP = 20
 VOLET_DOWN = 21
 PIN_TEMP = 23
 PIN_LIGHT = 25
-MAX_TEMP = 24
+MAX_TEMP = 22
 
 
 def relais(pin):
