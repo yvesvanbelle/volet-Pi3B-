@@ -68,6 +68,9 @@ def start():
         if light_or_dark == 0:
             action = VOLET_DOWN
 
+    if (current_day in (5, 6)) and (current_time < datetime.time(10)):
+        action = VOLET_DOWN
+
     if temperature > MAX_TEMP:
         action = VOLET_DOWN
 
