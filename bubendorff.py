@@ -49,7 +49,7 @@ def light(pin):
     return GPIO.input(pin)
 
 
-def start():
+def main():
     begin_day = datetime.time(6, 30)
     end_day = datetime.time(17)
     current_time = datetime.datetime.now().time()
@@ -80,4 +80,4 @@ def start():
 
 
 if __name__ == '__main__':
-    start()
+    main()
