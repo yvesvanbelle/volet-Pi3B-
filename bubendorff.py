@@ -57,12 +57,10 @@ def start():
     light_or_dark = light(PIN_LIGHT)  # 0=dark 1=light
     temperature = temp_humidity(PIN_TEMP)[0]
 
-    print(current_day)
-
-    action = VOLET_UP
-
     with open('/home/pi/volet-pi3b/statusvolet.txt', 'rb') as f:
         status = pickle.load(f)
+
+    action = VOLET_UP
 
     if not (begin_day < current_time < end_day):
         if light_or_dark == 0:
@@ -75,9 +73,10 @@ def start():
         action = VOLET_DOWN
 
     if action != status:
-        with open('/home/pi/volet-pi3b/statusvolet.txt', 'wb') as f:
-            pickle.dump(action, f)
         relais(action)
+
+    with open('/home/pi/volet-pi3b/statusvolet.txt', 'wb') as f:
+        pickle.dump(action, f)
 
 
 if __name__ == '__main__':
