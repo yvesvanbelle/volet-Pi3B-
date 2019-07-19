@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # Licensed under the MIT license
 # Copyright (c) 2019 Yves Van Belle (yvanbelle@outlook.com)
 
@@ -11,7 +12,7 @@ VOLET_UP = 20
 VOLET_DOWN = 21
 PIN_TEMP = 23
 PIN_LIGHT = 25
-MAX_TEMP = 24
+MAX_TEMP = 25
 
 
 def relais(pin):
