@@ -11,7 +11,7 @@ VOLET_UP = 20
 VOLET_DOWN = 21
 PIN_TEMP = 23
 PIN_LIGHT = 25
-MAX_TEMP = 22
+MAX_TEMP = 24
 
 
 def relais(pin):
@@ -56,6 +56,11 @@ def main():
     current_day = datetime.datetime.now().weekday()  # 0 is monday
     light_or_dark = light(PIN_LIGHT)  # 0=dark 1=light
     temperature = temp_humidity(PIN_TEMP)[0]
+
+    print('Day 0-6:', current_day)
+    print('Time:', current_time)
+    print('Dark 0 / Light 1', light_or_dark)
+    print('Temperature', temperature)
 
     with open('/home/pi/volet-pi3b/statusvolet.txt', 'rb') as f:
         status = pickle.load(f)
