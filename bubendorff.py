@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # Licensed under the MIT license
 # Copyright (c) 2019 Yves Van Belle (yvanbelle@outlook.com)
 
@@ -11,7 +12,7 @@ VOLET_UP = 20
 VOLET_DOWN = 21
 PIN_TEMP = 23
 PIN_LIGHT = 25
-MAX_TEMP = 24
+MAX_TEMP = 25
 
 
 def relais(pin):
@@ -49,7 +50,7 @@ def light(pin):
     return GPIO.input(pin)
 
 
-def start():
+def main():
     begin_day = datetime.time(6, 30)
     end_day = datetime.time(17)
     current_time = datetime.datetime.now().time()
@@ -57,12 +58,15 @@ def start():
     light_or_dark = light(PIN_LIGHT)  # 0=dark 1=light
     temperature = temp_humidity(PIN_TEMP)[0]
 
-    print(current_day)
-
-    action = VOLET_UP
+    print('Day 0-6:', current_day)
+    print('Time:', current_time)
+    print('Dark 0 / Light 1', light_or_dark)
+    print('Temperature', temperature)
 
     with open('/home/pi/volet-pi3b/statusvolet.txt', 'rb') as f:
         status = pickle.load(f)
+
+    action = VOLET_UP
 
     if not (begin_day < current_time < end_day):
         if light_or_dark == 0:
@@ -75,10 +79,11 @@ def start():
         action = VOLET_DOWN
 
     if action != status:
-        with open('/home/pi/volet-pi3b/statusvolet.txt', 'wb') as f:
-            pickle.dump(action, f)
         relais(action)
+
+    with open('/home/pi/volet-pi3b/statusvolet.txt', 'wb') as f:
+        pickle.dump(action, f)
 
 
 if __name__ == '__main__':
-    start()
+    main()
